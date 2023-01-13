@@ -14,11 +14,11 @@ form.addEventListener("submit", (evento) => {
     const nome = evento.target.elements['nome'];
     const quantidade = evento.target.elements['quantidade'];
     const itemAtual = {
-        "nome": nome.value,
+        "nome": nome.value.toLowerCase(),
         "quantidade": quantidade.value,
     }
 
-    const existe = itens.find(elemento => elemento.nome === nome.value);
+    const existe = itens.find(elemento => elemento.nome === nome.value.toLowerCase());
     if (existe) {
         itemAtual.id = existe.id;
         atualizaElemento(itemAtual);
@@ -58,6 +58,7 @@ function atualizaElemento(itemAtual) {
 function botaoDeleta(id) {
     const elementoBotao = document.createElement("button");
     elementoBotao.innerText = "X";
+    elementoBotao.classList.add("botao__excluir");
     elementoBotao.addEventListener("click", function () {
         deletaElemento(this.parentNode, id);
     });
